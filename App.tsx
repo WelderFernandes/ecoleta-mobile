@@ -1,19 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Routes from './src/routes';
+import { AppLoading } from 'expo';
+import { StatusBar } from 'react-native';
+import { Roboto_400Regular, Roboto_500Medium, useFonts} from '@expo-google-fonts/roboto';
+import { Ubuntu_700Bold } from '@expo-google-fonts/ubuntu';
+
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Ubuntu_700Bold,
+    Roboto_500Medium
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
+        <Routes />
+      </>
+    );
+  }
+}
